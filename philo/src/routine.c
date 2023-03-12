@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 18:52:39 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/12 20:30:46 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/12 21:37:52 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,33 +29,30 @@ static void	spend_time(t_philosopher *philo, int index_info)
 		gettimeofday(&cur_time, NULL);
 		passed_time = get_timestamp(cur_time, start_time);
 	}
-	return ;
 }
 
 int	the_thinker(t_philosopher *philo)
 {
 	gettimeofday(&philo->cur_time, NULL);
 	print_philo(philo, THINKING);
-	while ()
-	{
-		usleep(100);
-	}
+	usleep(100);
 	return (1);
 }
 
 static int	eat_spaghetti(t_philosopher *philo)
 {
 	gettimeofday(&philo->cur_time, NULL);
-	print_philo(philo, EATING);
+	if (print_philo(philo, EATING) == 0)
+		return (0);
 	spend_time(philo, TIME_TO_EAT);
 	philo->last_eat_time = philo->cur_time;
 	philo->eat_count++;
 	if (philo->shared->info[MUST_EAT] != 0
 		&& philo->eat_count == philo->shared->info[MUST_EAT])
 	{
-		pthread_mutex_lock(&philo->shared->all_eat_mutex);
+		pthread_mutex_lock(&philo->shared->m_all_eat);
 		philo->shared->all_eat++;
-		pthread_mutex_unlock(&philo->shared->all_eat_mutex);
+		pthread_mutex_unlock(&philo->shared->m_all_eat);
 	}
 	return (1);
 }

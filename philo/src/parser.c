@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 09:29:37 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/12 19:39:00 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/12 21:40:27 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,11 @@ static int	set_info(t_shared_data *shared, char **argv)
 		shared->info[MUST_EAT] = shared->info[IS_LIMIT_EAT];
 		shared->info[IS_LIMIT_EAT] = 1;
 	}
-	shared->forks = ft_calloc (shared->info[PHILOSOPHERS], sizeof(int));
+	shared->forks = ft_calloc(shared->info[PHILOS], sizeof(int));
 	if (shared->forks == NULL)
 		return (0);
-	shared->forks_mutex = ft_calloc
-		(shared->info[PHILOSOPHERS], sizeof(pthread_mutex_t));
-	if (shared->forks_mutex == NULL)
+	shared->m_forks = ft_calloc(shared->info[PHILOS], sizeof(pthread_mutex_t));
+	if (shared->m_forks == NULL)
 		return (0);
 	return (1);
 }
@@ -107,7 +106,7 @@ int	parse_argument(int argc, char **argv, t_shared_data *shared)
 	{
 		ft_free((void **)&shared->info);
 		ft_free((void **)&shared->forks);
-		ft_free((void **)&shared->forks_mutex);
+		ft_free((void **)&shared->m_forks);
 		return (0);
 	}
 	return (1);

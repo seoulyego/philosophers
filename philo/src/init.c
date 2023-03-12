@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:10:30 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/12 20:33:46 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/12 21:40:18 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@
 
 static int	init_mutex(t_shared_data *shared)
 {
-	const int	philos = shared->info[PHILOSOPHERS];
+	const int	philos = shared->info[PHILOS];
 	int			index;
 
 	index = 0;
 	while (index < philos)
 	{
-		pthread_mutex_init(&shared->forks_mutex[index], NULL);
+		pthread_mutex_init(&shared->m_forks[index], NULL);
 		index++;
 	}
-	pthread_mutex_init(&shared->someone_die_mutex, NULL);
-	pthread_mutex_init(&shared->all_eat_mutex, NULL);
+	pthread_mutex_init(&shared->m_someone_die, NULL);
+	pthread_mutex_init(&shared->m_all_eat, NULL);
 	return (1);
 }
 
 int	init_philosopher(t_philosopher **philosopher, t_shared_data *shared)
 {
-	const int	philos = shared->info[PHILOSOPHERS];
+	const int	philos = shared->info[PHILOS];
 	int			index;
 
 	*philosopher = ft_calloc(philos, sizeof(t_philosopher));

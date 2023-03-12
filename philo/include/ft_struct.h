@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 07:38:32 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/12 20:24:09 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/12 21:40:18 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ struct s_shared_data
 	int				*info;
 	t_time			start_time;
 	int				*forks;
-	pthread_mutex_t	*forks_mutex;
+	pthread_mutex_t	*m_forks;
 	int				someone_die;
-	pthread_mutex_t	someone_die_mutex;
+	pthread_mutex_t	m_someone_die;
 	int				all_eat;
-	pthread_mutex_t	all_eat_mutex;
+	pthread_mutex_t	m_all_eat;
 };
 
 enum e_philo_info
 {
-	PHILOSOPHERS,
+	PHILOS,
 	TIME_TO_DIE,
 	TIME_TO_EAT,
 	TIME_TO_SLEEP,
@@ -62,7 +62,14 @@ enum e_routine
 	THINKING,
 	EATING,
 	SLEEPING,
-	DIED
+	DIED,
+	TAKE_FORK
+};
+
+enum e_fork_state
+{
+	AVAILABLE,
+	DISABLE
 };
 
 #endif

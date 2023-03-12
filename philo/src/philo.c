@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 14:02:19 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/12 20:32:07 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/12 21:40:18 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	*philo_routine(void *philosopher)
 
 int	create_thread(t_philosopher *philosopher)
 {
-	const int	philos = philosopher->shared->info[PHILOSOPHERS];
+	const int	philos = philosopher->shared->info[PHILOS];
 	int			index;
 
 	index = 0;
