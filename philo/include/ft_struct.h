@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 07:38:32 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/05 20:23:29 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/12 20:24:09 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,21 @@ struct s_philosopher
 {
 	pthread_t		thread;
 	int				id;
-	int				fork_state;
-	pthread_mutex_t	fork_state_mutex;
-	t_time			start_time;
+	int				routine;
+	int				eat_count;
+	int				r_fork;
+	int				l_fork;
 	t_time			cur_time;
 	t_time			last_eat_time;
-	int				eat_count;
-	int				routine;
-	t_shared_data	*shared_data;
+	t_shared_data	*shared;
 };
 
 struct s_shared_data
 {
-	int				*philo_info;
+	int				*info;
+	t_time			start_time;
+	int				*forks;
+	pthread_mutex_t	*forks_mutex;
 	int				someone_die;
 	pthread_mutex_t	someone_die_mutex;
 	int				all_eat;
@@ -53,6 +55,14 @@ enum e_philo_info
 	TIME_TO_SLEEP,
 	IS_LIMIT_EAT,
 	MUST_EAT
+};
+
+enum e_routine
+{
+	THINKING,
+	EATING,
+	SLEEPING,
+	DIED
 };
 
 #endif

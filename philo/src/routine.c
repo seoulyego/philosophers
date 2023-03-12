@@ -6,18 +6,17 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 18:52:39 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/05 21:33:55 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/12 20:30:46 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "routine.h"
 #include "message.h"
-#include <sys/time.h>
 #include <unistd.h>
 
 static void	spend_time(t_philosopher *philo, int index_info)
 {
-	const int		spend_time = philo->shared_data->philo_info[index_info];
+	const int		spend_time = philo->shared->info[index_info];
 	const t_time	start_time = philo->cur_time;
 	t_time			cur_time;
 	int				passed_time;
@@ -33,13 +32,31 @@ static void	spend_time(t_philosopher *philo, int index_info)
 	return ;
 }
 
-int	eat_spaghetti(t_philosopher *philo)
+int	the_thinker(t_philosopher *philo)
 {
 	gettimeofday(&philo->cur_time, NULL);
+	print_philo(philo, THINKING);
+	while ()
+	{
+		usleep(100);
+	}
+	return (1);
+}
+
+static int	eat_spaghetti(t_philosopher *philo)
+{
+	gettimeofday(&philo->cur_time, NULL);
+	print_philo(philo, EATING);
 	spend_time(philo, TIME_TO_EAT);
+	philo->last_eat_time = philo->cur_time;
 	philo->eat_count++;
-	// if (philo->shared_data->philo_info[MUST_EAT] != 0)
-	gettimeofday(&philo->last_eat_time, NULL);
+	if (philo->shared->info[MUST_EAT] != 0
+		&& philo->eat_count == philo->shared->info[MUST_EAT])
+	{
+		pthread_mutex_lock(&philo->shared->all_eat_mutex);
+		philo->shared->all_eat++;
+		pthread_mutex_unlock(&philo->shared->all_eat_mutex);
+	}
 	return (1);
 }
 
@@ -57,12 +74,7 @@ int	eating(t_philosopher *philo)
 int	dreams_come_true(t_philosopher *philo)
 {
 	gettimeofday(&philo->cur_time, NULL);
+	print_philo(philo, SLEEPING);
 	spend_time(philo, TIME_TO_SLEEP);
-	return (1);
-}
-
-int	the_thinker(t_philosopher *philo)
-{
-	gettimeofday(&philo->cur_time, NULL);
 	return (1);
 }
