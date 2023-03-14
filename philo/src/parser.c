@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 09:29:37 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/12 21:40:27 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/14 22:34:59 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,12 @@ static int	set_info(t_shared_data *shared, char **argv)
 	int	index;
 	int	data;
 
-	index = 1;
-	while (argv[index])
+	index = 0;
+	while (argv[++index])
 	{
 		if (ft_atoi(argv[index], &data) && data <= 0)
 			return (0);
 		shared->info[index - 1] = data;
-		index++;
 	}
 	if (shared->info[IS_LIMIT_EAT])
 	{
@@ -79,7 +78,10 @@ static int	set_info(t_shared_data *shared, char **argv)
 		return (0);
 	shared->m_forks = ft_calloc(shared->info[PHILOS], sizeof(pthread_mutex_t));
 	if (shared->m_forks == NULL)
+	{
+		ft_free((void **)&shared->forks);
 		return (0);
+	}
 	return (1);
 }
 
@@ -105,8 +107,6 @@ int	parse_argument(int argc, char **argv, t_shared_data *shared)
 	if (parse_by_argv(shared, argv))
 	{
 		ft_free((void **)&shared->info);
-		ft_free((void **)&shared->forks);
-		ft_free((void **)&shared->m_forks);
 		return (0);
 	}
 	return (1);

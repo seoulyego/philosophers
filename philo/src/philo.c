@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 14:02:19 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/14 18:24:10 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/14 23:08:08 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "routine.h"
 #include "monitor.h"
 #include "message.h"
+#include <pthread.h>
 
 void	set_up_routines(int (*f_routine[F_NUM])(t_philosopher *))
 {
@@ -44,7 +45,7 @@ int	get_routines(t_philosopher *philo)
 void	*philo_routine(void *philosopher)
 {
 	t_philosopher	*philo;
-	static	int		(*f_routine[F_NUM])(t_philosopher *);
+	static int		(*f_routine[F_NUM])(t_philosopher *);
 
 	philo = (t_philosopher *)philosopher;
 	philo->cur_time = philo->shared->start_time;
@@ -72,8 +73,14 @@ int	create_thread(t_philosopher *philosopher)
 	while (index < philos)
 	{
 		if (pthread_create(&philosopher[index].thread, \
-				NULL, philo_routine, philosopher) != 0)
+				NULL, philo_routine, &philosopher[index]) != 0)
 			return (0);
+		index++;
+	}
+	index = 0;
+	while (index < philos)
+	{
+		pthread_join(philosopher[index].thread, NULL);
 		index++;
 	}
 	return (1);

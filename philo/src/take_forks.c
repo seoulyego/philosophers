@@ -6,11 +6,10 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 19:06:06 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/14 18:46:16 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/14 22:24:48 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_struct.h"
 #include "monitor.h"
 #include "message.h"
 
@@ -38,12 +37,12 @@ static int	take_left_fork(t_philosopher *philo, t_shared_data *shared)
 
 int	take_forks(t_philosopher *philo)
 {
+	gettimeofday(&philo->cur_time, NULL);
 	if (monitor_philo(philo) == TRUE)
 		return (0);
 	if (take_right_fork(philo, philo->shared)
 		&& take_left_fork(philo, philo->shared))
 	{
-		gettimeofday(&philo->cur_time, NULL);
 		print_philo(philo, TAKE_FORK);
 		return (1);
 	}

@@ -6,11 +6,10 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:10:30 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/14 18:27:10 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/14 22:31:24 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_struct.h"
 #include "utils.h"
 #include "message.h"
 
@@ -22,12 +21,16 @@ static int	init_mutex(t_shared_data *shared)
 	index = 0;
 	while (index < philos)
 	{
-		pthread_mutex_init(&shared->m_forks[index], NULL);
+		if (pthread_mutex_init(&shared->m_forks[index], NULL) != 0)
+			return (0);
 		index++;
 	}
-	pthread_mutex_init(&shared->m_someone_die, NULL);
-	pthread_mutex_init(&shared->m_all_eat, NULL);
-	pthread_mutex_init(&shared->m_print, NULL);
+	if (pthread_mutex_init(&shared->m_someone_die, NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&shared->m_all_eat, NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&shared->m_print, NULL) != 0)
+		return (0);
 	return (1);
 }
 
@@ -52,6 +55,9 @@ int	init_philosopher(t_philosopher **philosopher, t_shared_data *shared)
 		index++;
 	}
 	if (init_mutex(shared) == 0)
+	{
+		ft_free((void **)philosopher);
 		return (0);
+	}
 	return (1);
 }

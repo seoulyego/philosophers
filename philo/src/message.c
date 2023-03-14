@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 09:40:23 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/14 20:18:50 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/14 22:15:38 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,22 @@ int	get_timestamp(t_time cur_time, t_time start_time)
 int	print_philo(t_philosopher *philo, int routine)
 {
 	int					timestamp;
-	static const char	*philo_msg[5] =
-	{"is thinking", "is eating", "is sleeping", "died", "has taken a fork"};
+	static const char	*message[5]
+		= {
+		"is thinking", "is eating", "is sleeping", "died", "has taken a fork"
+	};
 
-	pthread_mutex_lock(&philo->shared->m_print);
+	if (finish_philo(philo) == TRUE)
+		return (0);
 	timestamp = get_timestamp(philo->cur_time, philo->shared->start_time);
-	if (finish_philo(philo) == FALSE)
-		printf("%d %d %s\n", timestamp, philo->id, philo_msg[routine]);
+	pthread_mutex_lock(&philo->shared->m_print);
+	printf("%d %d %s\n", timestamp, philo->id, message[routine]);
 	pthread_mutex_unlock(&philo->shared->m_print);
 	if (routine == EATING)
-		increase_eat_count(philo);
+		check_all_eat(philo);
 	if (routine == DIED)
 	{
-		check_someone_died(philo);
+		set_someone_died(philo);
 		return (0);
 	}
 	return (1);
