@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 07:38:32 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/12 21:40:18 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/14 20:19:08 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ struct s_shared_data
 	pthread_mutex_t	m_someone_die;
 	int				all_eat;
 	pthread_mutex_t	m_all_eat;
+	pthread_mutex_t	m_print;
 };
 
 enum e_philo_info
@@ -70,6 +71,12 @@ enum e_fork_state
 {
 	AVAILABLE,
 	DISABLE
+};
+
+enum e_bool
+{
+	FALSE,
+	TRUE
 };
 
 #endif

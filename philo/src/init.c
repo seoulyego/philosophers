@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:10:30 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/12 21:40:18 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/14 18:27:10 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	init_mutex(t_shared_data *shared)
 	}
 	pthread_mutex_init(&shared->m_someone_die, NULL);
 	pthread_mutex_init(&shared->m_all_eat, NULL);
+	pthread_mutex_init(&shared->m_print, NULL);
 	return (1);
 }
 

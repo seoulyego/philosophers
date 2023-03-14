@@ -6,12 +6,13 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 14:02:19 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/12 21:40:18 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/14 18:24:10 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_struct.h"
 #include "routine.h"
+#include "monitor.h"
 #include "message.h"
 
 void	set_up_routines(int (*f_routine[F_NUM])(t_philosopher *))
@@ -29,12 +30,21 @@ int	init_f_index(t_philosopher *philo)
 		return (1);
 }
 
-int	get_routines(t_philosopher *philo);
+int	get_routines(t_philosopher *philo)
+{
+	if (philo->routine == THINKING)
+		philo->routine = EATING;
+	else if (philo->routine == EATING)
+		philo->routine = SLEEPING;
+	else if (philo->routine == SLEEPING)
+		philo->routine = THINKING;
+	return (1);
+}
 
 void	*philo_routine(void *philosopher)
 {
 	t_philosopher	*philo;
-	static int		(*f_routine[F_NUM])(t_philosopher *);
+	static	int		(*f_routine[F_NUM])(t_philosopher *);
 
 	philo = (t_philosopher *)philosopher;
 	philo->cur_time = philo->shared->start_time;
@@ -43,7 +53,10 @@ void	*philo_routine(void *philosopher)
 	set_up_routines(f_routine);
 	while (1)
 	{
-		f_routine[philo->routine](philo);
+		if (monitor_philo(philo) == TRUE)
+			break ;
+		if (f_routine[philo->routine](philo) == 0)
+			break ;
 		get_routines(philo);
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 #    By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/26 07:22:48 by yeongo            #+#    #+#              #
-#    Updated: 2023/02/26 14:43:14 by yeongo           ###   ########.fr        #
+#    Updated: 2023/03/14 12:53:50 by yeongo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,15 +25,19 @@ OBJ_DIR			:=	./.obj/
 CACHE_DIR		:=	./.cache/
 
 SRC_FILES		:=	$(addsuffix .c,			\
-	 				ft_ctype				\
 	 				ft_atoi					\
-	 				ft_string				\
+	 				ft_ctype				\
 	 				ft_memory				\
-	 				message					\
+	 				ft_string				\
+	 				get_down_forks			\
 	 				init					\
+	 				main					\
+	 				message					\
+	 				monitor					\
 	 				parser					\
 	 				philo					\
-	 				main					\
+	 				routine					\
+	 				take_forks				\
 					)
 OBJ_FILES		:=	$(SRC_FILES:.c=.o)
 JSON_FILES		:=	compile_commands.json
