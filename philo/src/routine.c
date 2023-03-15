@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 18:52:39 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/15 17:50:49 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/15 22:47:25 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,26 @@ static void	spend_time(t_philosopher *philo, int target_time)
 	int				waiting_time;
 
 	waiting_time = 0;
-	while (waiting_time < target_time)
+	while (waiting_time <= target_time)
 	{
 		gettimeofday(&progress_time, NULL);
 		waiting_time = get_timestamp(progress_time, started_time);
-		usleep(100);
+		usleep(10);
 	}
 }
 
-int	the_thinker(t_philosopher *philo)
+int	philo_think(t_philosopher *philo)
 {
+	// const int	time = philo->shared->info[TIME_TO_DIE]
+	// 	- philo->shared->info[TIME_TO_EAT]
+	// 	- philo->shared->info[TIME_TO_SLEEP];
+	//
 	gettimeofday(&philo->cur_time, NULL);
 	if (monitor_philo(philo) == TRUE)
 		return (0);
 	print_philo(philo, THINKING);
-	spend_time(philo, philo->shared->info[TIME_TO_SLEEP]);
+	// usleep(10);
+	// spend_time(philo, 100);
 	return (1);
 }
 
@@ -52,7 +57,7 @@ static int	eat_spaghetti(t_philosopher *philo)
 	return (1);
 }
 
-int	eating(t_philosopher *philo)
+int	philo_eating(t_philosopher *philo)
 {
 	gettimeofday(&philo->cur_time, NULL);
 	if (monitor_philo(philo) == TRUE)
@@ -67,7 +72,7 @@ int	eating(t_philosopher *philo)
 	return (1);
 }
 
-int	dreams_come_true(t_philosopher *philo)
+int	philo_sleep(t_philosopher *philo)
 {
 	gettimeofday(&philo->cur_time, NULL);
 	if (monitor_philo(philo) == TRUE)

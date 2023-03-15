@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 19:32:07 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/12 20:18:01 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/15 22:18:59 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	take_right_fork(t_philosopher *philo);
 int	get_down_forks(t_philosopher *philo);
 int	get_down_left_fork(t_philosopher *philo);
 int	get_down_right_fork(t_philosopher *philo);
-int	eating(t_philosopher *philo);
-int	dreams_come_true(t_philosopher *philo);
-int	the_thinker(t_philosopher *philo);
+int	philo_eating(t_philosopher *philo);
+int	philo_sleep(t_philosopher *philo);
+int	philo_think(t_philosopher *philo);
 
 #endif

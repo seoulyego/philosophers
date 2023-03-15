@@ -6,11 +6,12 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 12:54:49 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/15 17:45:37 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/15 22:39:18 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "message.h"
+#include <stdio.h>
 
 int	hungry_philo(t_philosopher *philo)
 {

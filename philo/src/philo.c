@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 14:02:19 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/15 14:57:27 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/15 22:38:35 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 #include "monitor.h"
 #include "message.h"
 #include <pthread.h>
-#include <stdio.h>
 
 void	set_up_routines(int (*f_routine[F_NUM])(t_philosopher *))
 {
-	f_routine[0] = the_thinker;
-	f_routine[1] = eating;
-	f_routine[2] = dreams_come_true;
+	f_routine[0] = philo_think;
+	f_routine[1] = philo_eating;
+	f_routine[2] = philo_sleep;
 }
 
 int	init_f_index(t_philosopher *philo)

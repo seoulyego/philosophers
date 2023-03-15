@@ -6,12 +6,11 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 19:05:45 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/15 17:45:55 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/15 22:43:17 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "monitor.h"
-#include <stdio.h>
 
 static int	get_down_right_fork(t_philosopher *philo, t_shared_data *shared)
 {
