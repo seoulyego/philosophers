@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 07:38:32 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/14 20:19:08 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/15 14:49:22 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-# define F_NUM 7
+# define F_NUM 3
 
 typedef struct s_philosopher	t_philosopher;
 typedef struct s_shared_data	t_shared_data;

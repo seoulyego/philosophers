@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 14:02:19 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/14 23:08:08 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/15 14:57:27 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 #include "monitor.h"
 #include "message.h"
 #include <pthread.h>
+#include <stdio.h>
 
 void	set_up_routines(int (*f_routine[F_NUM])(t_philosopher *))
 {
 	f_routine[0] = the_thinker;
-	f_routine[1] = take_forks;
+	f_routine[1] = eating;
 	f_routine[2] = dreams_come_true;
 }
 
@@ -51,7 +52,8 @@ void	*philo_routine(void *philosopher)
 	philo->cur_time = philo->shared->start_time;
 	philo->last_eat_time = philo->shared->start_time;
 	philo->routine = init_f_index(philo);
-	set_up_routines(f_routine);
+	if (philo->id == 1)
+		set_up_routines(f_routine);
 	while (1)
 	{
 		if (monitor_philo(philo) == TRUE)

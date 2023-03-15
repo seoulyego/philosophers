@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 09:29:37 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/14 22:34:59 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/15 11:04:32 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	is_digit_array(char **argv)
 	int	index_str;
 	int	index_char;
 
-	index_str = 0;
+	index_str = 1;
 	while (argv[index_str])
 	{
 		index_char = 0;
@@ -102,9 +102,9 @@ static int	parse_by_argv(t_shared_data *shared, char **argv)
 
 int	parse_argument(int argc, char **argv, t_shared_data *shared)
 {
-	if (parse_by_argc(shared, argc))
+	if (parse_by_argc(shared, argc) == 0)
 		return (0);
-	if (parse_by_argv(shared, argv))
+	if (parse_by_argv(shared, argv) == 0)
 	{
 		ft_free((void **)&shared->info);
 		return (0);

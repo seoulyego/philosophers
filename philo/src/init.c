@@ -6,12 +6,13 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:10:30 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/14 22:31:24 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/15 14:45:43 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "message.h"
+#include <stdio.h>
 
 static int	init_mutex(t_shared_data *shared)
 {
