@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 14:02:19 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/16 15:50:06 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/16 22:49:07 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,15 @@ int	create_thread(t_philosopher *philosopher)
 			return (0);
 		index++;
 	}
+	while (1)
+	{
+		if (monitor_philo(philosopher) == TRUE)
+			break ;
+	}
 	index = 0;
 	while (index < philos)
 	{
-		pthread_join(philosopher[index].thread, NULL);
+		pthread_detach(philosopher[index].thread);
 		index++;
 	}
 	return (1);

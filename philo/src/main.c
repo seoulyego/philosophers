@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 07:21:30 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/16 18:57:27 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/16 22:07:04 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ static void	destroy_mutex(t_shared_data *shared)
 	index = 0;
 	while (index < philos)
 	{
-		pthread_mutex_destroy(&shared->m_forks[index], NULL);
+		pthread_mutex_destroy(&shared->m_forks[index]);
 		index++;
 	}
-	pthread_mutex_destroy(&shared->m_someone_die, NULL);
-	pthread_mutex_destroy(&shared->m_all_eat, NULL);
-	pthread_mutex_destroy(&shared->m_print, NULL);
+	pthread_mutex_destroy(&shared->m_someone_die);
+	pthread_mutex_destroy(&shared->m_all_eat);
+	pthread_mutex_destroy(&shared->m_print);
 }
 
 static void	free_all_heap(t_philosopher **philosopher, t_shared_data *shared)
 {
-	ft_free(shared->info);
-	ft_free(shared->forks);
-	ft_free(shared->m_forks);
-	ft_free(philosopher);
+	ft_free((void **)&(shared->info));
+	ft_free((void **)&(shared->forks));
+	ft_free((void **)&(shared->m_forks));
+	ft_free((void **)philosopher);
 }
 
 void	destroy_and_free(t_philosopher **philosopher, t_shared_data *shared)
@@ -56,6 +56,6 @@ int	main(int argc, char **argv)
 		return (1);
 	if (create_thread(philosopher) == 0)
 		return (1);
-	destroy_mutex_and_free_heap(&philosopher, &shared);
+	destroy_and_free(&philosopher, &shared);
 	return (0);
 }
