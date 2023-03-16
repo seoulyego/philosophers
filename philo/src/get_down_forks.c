@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 19:05:45 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/15 22:43:17 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/16 12:40:57 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ static int	get_down_right_fork(t_philosopher *philo, t_shared_data *shared)
 {
 	if (monitor_philo(philo) == TRUE)
 		return (0);
-	// pthread_mutex_lock(&shared->m_forks[philo->r_fork]);
 	if (shared->forks[philo->r_fork] == DISABLE)
 		shared->forks[philo->r_fork] = AVAILABLE;
-	// pthread_mutex_unlock(&shared->m_forks[philo->r_fork]);
 	return (1);
 }
 
@@ -27,10 +25,8 @@ static int	get_down_left_fork(t_philosopher *philo, t_shared_data *shared)
 {
 	if (monitor_philo(philo) == TRUE)
 		return (0);
-	// pthread_mutex_lock(&shared->m_forks[philo->l_fork]);
 	if (shared->forks[philo->l_fork] == DISABLE)
 		shared->forks[philo->l_fork] = AVAILABLE;
-	// pthread_mutex_unlock(&shared->m_forks[philo->l_fork]);
 	return (1);
 }
 

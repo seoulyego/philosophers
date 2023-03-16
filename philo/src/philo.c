@@ -6,15 +6,12 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 14:02:19 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/15 22:38:35 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/16 13:54:43 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_struct.h"
 #include "routine.h"
 #include "monitor.h"
-#include "message.h"
-#include <pthread.h>
 
 void	set_up_routines(int (*f_routine[F_NUM])(t_philosopher *))
 {

@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 09:40:23 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/15 22:40:06 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/16 12:48:54 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ int	print_philo(t_philosopher *philo, int routine)
 	printf("%d %d %s\n", timestamp, philo->id, message[routine]);
 	pthread_mutex_unlock(&philo->shared->m_print);
 	if (philo->shared->info[IS_LIMIT_EAT] && routine == EATING)
+	{
 		check_all_eat(philo);
+		return (finish_philo(philo) == FALSE);
+	}
 	if (routine == DIED)
 	{
 		set_someone_died(philo);

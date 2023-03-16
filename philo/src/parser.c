@@ -6,11 +6,10 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 09:29:37 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/15 11:04:32 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/16 13:54:20 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_struct.h"
 #include "utils.h"
 #include "message.h"
 #include <string.h>

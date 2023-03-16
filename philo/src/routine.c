@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 18:52:39 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/15 22:47:25 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/16 12:43:46 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,10 @@ static void	spend_time(t_philosopher *philo, int target_time)
 
 int	philo_think(t_philosopher *philo)
 {
-	// const int	time = philo->shared->info[TIME_TO_DIE]
-	// 	- philo->shared->info[TIME_TO_EAT]
-	// 	- philo->shared->info[TIME_TO_SLEEP];
-	//
 	gettimeofday(&philo->cur_time, NULL);
 	if (monitor_philo(philo) == TRUE)
 		return (0);
 	print_philo(philo, THINKING);
-	// usleep(10);
-	// spend_time(philo, 100);
 	return (1);
 }
 
@@ -50,10 +44,10 @@ static int	eat_spaghetti(t_philosopher *philo)
 	gettimeofday(&philo->cur_time, NULL);
 	if (monitor_philo(philo) == TRUE)
 		return (0);
+	philo->eat_count++;
+	philo->last_eat_time = philo->cur_time;
 	print_philo(philo, EATING);
 	spend_time(philo, philo->shared->info[TIME_TO_EAT]);
-	philo->last_eat_time = philo->cur_time;
-	philo->eat_count++;
 	return (1);
 }
 

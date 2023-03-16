@@ -6,14 +6,13 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 07:21:30 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/15 11:01:39 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/16 13:53:37 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "init.h"
 #include "philo.h"
-#include "utils.h"
 
 int	main(int argc, char **argv)
 {
