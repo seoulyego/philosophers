@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 14:02:19 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/16 13:54:43 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/16 15:50:06 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	set_up_routines(int (*f_routine[F_NUM])(t_philosopher *))
 int	init_f_index(t_philosopher *philo)
 {
 	if (philo->id % 2 == 0)
+		return (0);
+	else if (philo->id == philo->shared->info[PHILOS])
 		return (0);
 	else
 		return (1);

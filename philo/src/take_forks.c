@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 19:06:06 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/16 12:40:46 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/16 18:36:26 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	take_forks(t_philosopher *philo)
 	if (take_right_fork(philo, philo->shared)
 		&& take_left_fork(philo, philo->shared))
 	{
-		print_philo(philo, TAKE_FORK);
+		if (print_philo(philo, TAKE_FORK) == 0)
+			return (0);
 		return (1);
 	}
 	return (0);
