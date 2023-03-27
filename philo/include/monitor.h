@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 12:54:03 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/14 22:16:05 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/27 15:12:57 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include "ft_struct.h"
 
 int		hungry_philo(t_philosopher *philo);
-int		finish_philo(t_philosopher *philo);
-int		monitor_philo(t_philosopher *philo);
-void	check_all_eat(t_philosopher *philo);
-void	set_someone_died(t_philosopher *philo);
+int		finish_philo(t_shared_data *shared);
+int		monitor_philo(t_philosopher *philosopher, t_shared_data *shared);
+void	count_all_eat(t_philosopher *philo);
+void	set_finish_philo(t_philosopher *philo);
 
 #endif

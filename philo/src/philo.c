@@ -6,18 +6,20 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 14:02:19 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/16 22:49:07 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/27 11:00:13 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "routine.h"
 #include "monitor.h"
+#include <sys/time.h>
+#include <unistd.h>
 
 void	set_up_routines(int (*f_routine[F_NUM])(t_philosopher *))
 {
-	f_routine[0] = philo_think;
-	f_routine[1] = philo_eating;
-	f_routine[2] = philo_sleep;
+	f_routine[EATING] = philo_eating;
+	f_routine[SLEEPING] = philo_sleep;
+	f_routine[THINKING] = philo_think;
 }
 
 int	init_f_index(t_philosopher *philo)
@@ -32,12 +34,14 @@ int	init_f_index(t_philosopher *philo)
 
 int	get_routines(t_philosopher *philo)
 {
-	if (philo->routine == THINKING)
-		philo->routine = EATING;
+	if (finish_philo(philo->shared) == TRUE)
+		return (0);
 	else if (philo->routine == EATING)
 		philo->routine = SLEEPING;
 	else if (philo->routine == SLEEPING)
 		philo->routine = THINKING;
+	else if (philo->routine == THINKING)
+		philo->routine = EATING;
 	return (1);
 }
 
@@ -47,23 +51,28 @@ void	*philo_routine(void *philosopher)
 	static int		(*f_routine[F_NUM])(t_philosopher *);
 
 	philo = (t_philosopher *)philosopher;
+	// gettimeofday(&philo->start_time, NULL);
 	philo->cur_time = philo->shared->start_time;
 	philo->last_eat_time = philo->shared->start_time;
-	philo->routine = init_f_index(philo);
+	philo->routine = EATING;
+	// philo->routine = init_f_index(philo);
 	if (philo->id == 1)
 		set_up_routines(f_routine);
+	if (philo->id % 2 == 0)
+		usleep(100);
 	while (1)
 	{
-		if (monitor_philo(philo) == TRUE)
+		if (finish_philo(philo->shared) == TRUE)
 			break ;
-		if (f_routine[philo->routine](philo) == 0)
+		if (f_routine[philo->routine](philo) == FALSE)
 			break ;
-		get_routines(philo);
+		if (get_routines(philo) == FALSE)
+			break ;
 	}
 	return (NULL);
 }
 
-int	create_thread(t_philosopher *philosopher)
+int	create_thread(t_philosopher *philosopher, t_shared_data *shared)
 {
 	const int	philos = philosopher->shared->info[PHILOS];
 	int			index;
@@ -79,13 +88,13 @@ int	create_thread(t_philosopher *philosopher)
 	}
 	while (1)
 	{
-		if (monitor_philo(philosopher) == TRUE)
+		if (monitor_philo(philosopher, shared) == TRUE)
 			break ;
 	}
 	index = 0;
 	while (index < philos)
 	{
-		pthread_detach(philosopher[index].thread);
+		pthread_join(philosopher[index].thread, NULL);
 		index++;
 	}
 	return (1);

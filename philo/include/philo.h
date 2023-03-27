@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 17:34:48 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/05 17:36:45 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/24 22:27:54 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "ft_struct.h"
 
-int	create_thread(t_philosopher *philosopher);
+int	create_thread(t_philosopher *philosopher, t_shared_data *shared);
 
 #endif

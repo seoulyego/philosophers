@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 19:05:45 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/16 12:40:57 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/27 11:03:38 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	get_down_right_fork(t_philosopher *philo, t_shared_data *shared)
 {
-	if (monitor_philo(philo) == TRUE)
+	if (finish_philo(philo->shared) == TRUE)
 		return (0);
 	if (shared->forks[philo->r_fork] == DISABLE)
 		shared->forks[philo->r_fork] = AVAILABLE;
@@ -23,7 +23,7 @@ static int	get_down_right_fork(t_philosopher *philo, t_shared_data *shared)
 
 static int	get_down_left_fork(t_philosopher *philo, t_shared_data *shared)
 {
-	if (monitor_philo(philo) == TRUE)
+	if (finish_philo(philo->shared) == TRUE)
 		return (0);
 	if (shared->forks[philo->l_fork] == DISABLE)
 		shared->forks[philo->l_fork] = AVAILABLE;
@@ -32,10 +32,16 @@ static int	get_down_left_fork(t_philosopher *philo, t_shared_data *shared)
 
 int	get_down_forks(t_philosopher *philo)
 {
-	if (monitor_philo(philo) == TRUE)
+	if (finish_philo(philo->shared) == TRUE)
 		return (0);
-	if (get_down_right_fork(philo, philo->shared)
-		&& get_down_left_fork(philo, philo->shared))
+	if (get_down_left_fork(philo, philo->shared)
+		&& get_down_right_fork(philo, philo->shared))
+	{
+		pthread_mutex_unlock(&philo->shared->m_forks[philo->l_fork]);
+		pthread_mutex_unlock(&philo->shared->m_forks[philo->r_fork]);
 		return (1);
+	}
+	pthread_mutex_unlock(&philo->shared->m_forks[philo->l_fork]);
+	pthread_mutex_unlock(&philo->shared->m_forks[philo->r_fork]);
 	return (0);
 }

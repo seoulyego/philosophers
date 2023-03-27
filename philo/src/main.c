@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 07:21:30 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/16 22:07:04 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/27 15:23:30 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "init.h"
 #include "philo.h"
 #include "utils.h"
+#include <stdio.h>
 
 static void	destroy_mutex(t_shared_data *shared)
 {
@@ -26,7 +27,7 @@ static void	destroy_mutex(t_shared_data *shared)
 		pthread_mutex_destroy(&shared->m_forks[index]);
 		index++;
 	}
-	pthread_mutex_destroy(&shared->m_someone_die);
+	pthread_mutex_destroy(&shared->m_end_philo);
 	pthread_mutex_destroy(&shared->m_all_eat);
 	pthread_mutex_destroy(&shared->m_print);
 }
@@ -54,7 +55,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (init_philosopher(&philosopher, &shared) == 0)
 		return (1);
-	if (create_thread(philosopher) == 0)
+	if (create_thread(philosopher, &shared) == 0)
 		return (1);
 	destroy_and_free(&philosopher, &shared);
 	return (0);

@@ -6,14 +6,15 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:10:30 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/16 21:55:11 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/27 15:53:42 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "message.h"
+#include <pthread.h>
 
-static int	init_mutex(t_shared_data *shared)
+static int	init_mutex(t_philosopher *philosopher, t_shared_data *shared)
 {
 	const int	philos = shared->info[PHILOS];
 	int			index;
@@ -21,11 +22,15 @@ static int	init_mutex(t_shared_data *shared)
 	index = 0;
 	while (index < philos)
 	{
+		if (pthread_mutex_init(&philosopher[index].m_last_eat_time, NULL))
+			return (0);
 		if (pthread_mutex_init(&(shared->m_forks[index]), NULL) != 0)
 			return (0);
 		index++;
 	}
-	if (pthread_mutex_init(&(shared->m_someone_die), NULL) != 0)
+	if (pthread_mutex_init(&(shared->m_start_time), NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&(shared->m_end_philo), NULL) != 0)
 		return (0);
 	if (pthread_mutex_init(&(shared->m_all_eat), NULL) != 0)
 		return (0);
@@ -54,7 +59,7 @@ int	init_philosopher(t_philosopher **philosopher, t_shared_data *shared)
 		(*philosopher)[index].shared = shared;
 		index++;
 	}
-	if (init_mutex(shared) == 0)
+	if (init_mutex(*philosopher, shared) == 0)
 	{
 		ft_free((void **)philosopher);
 		return (0);
