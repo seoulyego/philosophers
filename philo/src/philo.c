@@ -6,13 +6,12 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 14:02:19 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/27 11:00:13 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/29 10:10:57 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "routine.h"
 #include "monitor.h"
-#include <sys/time.h>
 #include <unistd.h>
 
 void	set_up_routines(int (*f_routine[F_NUM])(t_philosopher *))
@@ -51,22 +50,18 @@ void	*philo_routine(void *philosopher)
 	static int		(*f_routine[F_NUM])(t_philosopher *);
 
 	philo = (t_philosopher *)philosopher;
-	// gettimeofday(&philo->start_time, NULL);
 	philo->cur_time = philo->shared->start_time;
 	philo->last_eat_time = philo->shared->start_time;
 	philo->routine = EATING;
-	// philo->routine = init_f_index(philo);
 	if (philo->id == 1)
 		set_up_routines(f_routine);
 	if (philo->id % 2 == 0)
 		usleep(100);
-	while (1)
+	while (finish_philo(philo->shared) != TRUE)
 	{
-		if (finish_philo(philo->shared) == TRUE)
-			break ;
 		if (f_routine[philo->routine](philo) == FALSE)
 			break ;
-		if (get_routines(philo) == FALSE)
+		if (get_routines(philo) == 0)
 			break ;
 	}
 	return (NULL);
@@ -86,15 +81,13 @@ int	create_thread(t_philosopher *philosopher, t_shared_data *shared)
 			return (0);
 		index++;
 	}
-	while (1)
-	{
-		if (monitor_philo(philosopher, shared) == TRUE)
-			break ;
-	}
+	while (monitor_philo(shared) != TRUE)
+		usleep(100);
 	index = 0;
 	while (index < philos)
 	{
-		pthread_join(philosopher[index].thread, NULL);
+		pthread_detach(philosopher[index].thread);
+		// pthread_join(philosopher[index].thread, NULL);
 		index++;
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 07:38:32 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/27 15:47:31 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/29 10:23:46 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ struct s_philosopher
 	int				r_fork;
 	int				l_fork;
 	t_time			cur_time;
+	// long			timestamp;
 	t_time			last_eat_time;
 	pthread_mutex_t	m_last_eat_time;
 	t_shared_data	*shared;
