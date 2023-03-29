@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.h                                          :+:      :+:    :+:   */
+/*   action.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Guest <Guest@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 20:26:30 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/29 22:47:35 by Guest            ###   ########.fr       */
+/*   Created: 2023/03/29 22:42:53 by Guest             #+#    #+#             */
+/*   Updated: 2023/03/29 22:55:19 by Guest            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ROUTINE_H
-# define ROUTINE_H
+#include "routine.h"
 
-# include "ft_struct.h"
+int	philo_eating(t_philosopher *philo)
+{
+	if (take_forks(philo) && eat_philo(philo) && get_down_forks(philo) == 0)
+		return (0);
+	return (1);
+}
 
-int		philo_eating(t_philosopher *philo);
-int		philo_sleeping(t_philosopher *philo);
-int		philo_thinking(t_philosopher *philo);
-void	*philo_routine(void *philosopher);
+int	philo_sleeping(t_philosopher *philo);
 
-#endif
+int	philo_thinking(t_philosopher *philo);

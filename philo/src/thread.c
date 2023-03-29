@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: Guest <Guest@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 17:07:31 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/29 20:28:49 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/29 23:22:09 by Guest            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	run_thread(t_philosopher *philosopher, int philos)
 	return (1);
 }
 
-void	monitor_thread(t_philosopher *philosopher, t_shared_data *shared, int philos)
+void	monitor_thread(
+	t_philosopher *philosopher, t_shared_data *shared, int philos)
 {
 	int	index;
 	int	id;
