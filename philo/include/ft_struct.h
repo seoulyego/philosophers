@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/26 07:38:32 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/29 10:23:46 by yeongo           ###   ########.fr       */
+/*   Created: 2023/03/29 15:52:31 by yeongo            #+#    #+#             */
+/*   Updated: 2023/03/29 20:38:05 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 typedef struct s_philosopher	t_philosopher;
 typedef struct s_shared_data	t_shared_data;
+typedef struct s_info			t_info;
 typedef struct timeval			t_time;
 
 struct s_philosopher
@@ -27,31 +28,35 @@ struct s_philosopher
 	pthread_t		thread;
 	int				id;
 	int				routine;
-	int				eat_count;
-	int				r_fork;
 	int				l_fork;
+	int				r_fork;
+	int				eat_count;
 	t_time			cur_time;
-	// long			timestamp;
-	t_time			last_eat_time;
+
 	pthread_mutex_t	m_last_eat_time;
+	t_time			last_eat_time;
+
 	t_shared_data	*shared;
 };
 
 struct s_shared_data
 {
 	int				*info;
-	int				*forks;
-	pthread_mutex_t	*m_forks;
 	t_time			start_time;
-	pthread_mutex_t	m_start_time;
-	int				end_philo;
+
+	pthread_mutex_t	*m_forks;
+	int				*forks;
+
 	pthread_mutex_t	m_end_philo;
-	int				all_eat;
-	pthread_mutex_t	m_all_eat;
+	int				end_philo;
+
+	pthread_mutex_t	m_eat_complete;
+	int				eat_complete;
+
 	pthread_mutex_t	m_print;
 };
 
-enum e_philo_info
+enum e_info
 {
 	PHILOS,
 	TIME_TO_DIE,
@@ -67,7 +72,7 @@ enum e_routine
 	SLEEPING,
 	THINKING,
 	DIED,
-	TAKE_FORK
+	TAKE_FORKS
 };
 
 enum e_fork_state
@@ -76,7 +81,7 @@ enum e_fork_state
 	DISABLE
 };
 
-enum e_bool
+enum e_result
 {
 	FALSE,
 	TRUE

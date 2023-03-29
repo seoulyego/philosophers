@@ -6,7 +6,7 @@
 #    By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/26 07:22:48 by yeongo            #+#    #+#              #
-#    Updated: 2023/03/27 14:55:17 by yeongo           ###   ########.fr        #
+#    Updated: 2023/03/29 17:58:42 by yeongo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,15 +29,11 @@ SRC_FILES		:=	$(addsuffix .c,			\
 	 				ft_ctype				\
 	 				ft_memory				\
 	 				ft_string				\
-	 				get_down_forks			\
-	 				init					\
 	 				main					\
 	 				message					\
-	 				monitor					\
 	 				parser					\
-	 				philo					\
-	 				routine					\
-	 				take_forks				\
+	 				init					\
+	 				thread					\
 					)
 OBJ_FILES		:=	$(SRC_FILES:.c=.o)
 JSON_FILES		:=	compile_commands.json
@@ -55,7 +51,7 @@ ifdef TEST
 		OBJ				+=	$(addprefix $(OBJ_DIR), $(addsuffix .o, print_test))
 		PRINT			:=	$(addsuffix _TEST, $(PRINT))
 else ifdef DEBUG
-		DBFLAGS			:=	-g -fsanitize=undefined,thread
+		DBFLAGS			:=	-g -fsanitize=address
 		PRINT			:=	$(addsuffix _DEBUG, $(PRINT))
 endif
 

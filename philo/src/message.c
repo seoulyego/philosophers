@@ -6,47 +6,28 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 09:40:23 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/29 10:07:54 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/29 20:52:14 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "monitor.h"
+#include "ft_struct.h"
 #include "utils.h"
 #include <stdio.h>
 
-int	get_timestamp(t_time cur_time, t_time start_time)
+int	print_routine(t_philosopher *philo, t_shared_data *shared, int routine)
 {
-	return ((cur_time.tv_sec - start_time.tv_sec) * 1000
-		+ (cur_time.tv_usec - start_time.tv_usec) / 1000);
+	pthread_mutex_lock(&shared->m_print);
+	printf("philo[%d] : hi\n", philo->id);
+	pthread_mutex_unlock(&shared->m_print);
+	return (1);
 }
 
-int	print_philo(t_philosopher *philo, int routine)
+int	print_death(t_philosopher *philo, t_shared_data *shared)
 {
-	int					timestamp;
-	static const char	*message[5]
-		= {"is eating", "is sleeping", "is thinking", \
-			"died", "has taken a fork"};
+	long	timestamp;
 
-	if (finish_philo(philo->shared) == TRUE)
-		return (0);
-	pthread_mutex_lock(&philo->shared->m_print);
-	gettimeofday(&philo->cur_time, NULL);
-	pthread_mutex_lock(&philo->shared->m_start_time);
-	timestamp = get_timestamp(philo->cur_time, philo->shared->start_time);
-	pthread_mutex_unlock(&philo->shared->m_start_time);
-	if (finish_philo(philo->shared) == FALSE)
-		printf("%d %d %s\n", timestamp, philo->id, message[routine]);
-	pthread_mutex_unlock(&philo->shared->m_print);
-	if (routine == DIED)
-	{
-		set_finish_philo(philo);
-		return (0);
-	}
-	else if (routine == EATING && philo->shared->info[IS_LIMIT_EAT])
-	{
-		count_all_eat(philo);
-		return (finish_philo(philo->shared) != TRUE);
-	}
+	timestamp = get_timestamp(philo->cur_time, shared->start_time);
+	printf("%d %d is died\n", timestamp, philo->id);
 	return (1);
 }
 
