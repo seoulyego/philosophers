@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.h                                          :+:      :+:    :+:   */
+/*   monitor.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 20:26:30 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/30 16:14:10 by yeongo           ###   ########.fr       */
+/*   Created: 2023/03/30 14:41:28 by yeongo            #+#    #+#             */
+/*   Updated: 2023/03/30 16:28:41 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ROUTINE_H
-# define ROUTINE_H
+#ifndef MONITOR_H
+# define MONITOR_H
 
 # include "ft_struct.h"
 
-void	*philo_routine(void *philosopher);
+int	monitor_starving(t_philosopher *philo, t_shared_data *shared);
+int	monitor_finish(t_shared_data *shared);
 
 #endif

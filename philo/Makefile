@@ -6,7 +6,7 @@
 #    By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/26 07:22:48 by yeongo            #+#    #+#              #
-#    Updated: 2023/03/29 17:58:42 by yeongo           ###   ########.fr        #
+#    Updated: 2023/03/30 18:07:38 by yeongo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ PROJECT_NAME	:=	PHILOSOPHERS
 CC				:=	cc
 CFLAGS			:=	-Wall -Wextra -Werror
 CPPFLAGS		:=
-MJFLAGS			 =	-MJ $@.part.json
+MJFLAGS			 =	
+LDFLAGS			:=	-pthread
+# -MJ $@.part.json
 RM				:=	rm -rf
 
 HEADER			:=	./include/
@@ -25,15 +27,21 @@ OBJ_DIR			:=	./.obj/
 CACHE_DIR		:=	./.cache/
 
 SRC_FILES		:=	$(addsuffix .c,			\
+	 				action					\
+	 				eat_action				\
 	 				ft_atoi					\
 	 				ft_ctype				\
 	 				ft_memory				\
 	 				ft_string				\
+	 				get_down_fork			\
+	 				init					\
 	 				main					\
 	 				message					\
+	 				monitor					\
 	 				parser					\
-	 				init					\
-	 				thread					\
+					routine					\
+					take_fork				\
+					thread					\
 					)
 OBJ_FILES		:=	$(SRC_FILES:.c=.o)
 JSON_FILES		:=	compile_commands.json
@@ -64,12 +72,13 @@ $(OBJ_FOLDER)	:
 	fi
 
 $(NAME)	:	$(OBJS)
-	@$(CC) $(DBFLAGS) -o $@ $^
-	@(printf [ && find . -name "*.part.json" | xargs cat && printf ]) > $(JSON_FILES);
+	@$(CC) $(LDFLAGS) $(DBFLAGS) -o $@ $^
 	@echo "\033[01;32m         SUCCESS!        \033[0m"
+# @(printf [ && find . -name "*.part.json" | xargs cat && printf ]) > $(JSON_FILES);
 
 $(OBJ_FOLDER)%.o	:	$(SRC_FOLDER)%.c
-	@$(CC) $(CFLAGS) $(DBFLAGS) $(CPPFLAGS) $(MJFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) $(DBFLAGS) $(CPPFLAGS) $(LDFLAGS) $(MJFLAGS) -c -o $@ $<
+ 
 
 .PHONY	:	test
 test	:

@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 09:29:37 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/29 16:17:47 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/30 17:33:04 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ static int	parse_by_argc(t_shared_data *shared, int argc)
 	if (argc != 5 && argc != 6)
 	{
 		print_error_message("Invalid number of arguments");
-		return (0);
+		return (FAIL);
 	}
 	memset(shared, 0, sizeof(t_shared_data));
 	shared->info = ft_calloc(argc, sizeof(int));
 	if (shared->info == NULL)
 	{
 		print_error_message("Fail to allocate memory");
-		return (0);
+		return (FAIL);
 	}
-	return (1);
+	return (SUCCESS);
 }
 
 static int	is_digit_array(char **argv)
@@ -47,12 +47,12 @@ static int	is_digit_array(char **argv)
 		while (argv[index_str][index_char])
 		{
 			if (ft_isdigit(argv[index_str][index_char]) == 0)
-				return (0);
+				return (FAIL);
 			index_char++;
 		}
 		index_str++;
 	}
-	return (1);
+	return (SUCCESS);
 }
 
 static int	set_info(t_shared_data *shared, char **argv)
@@ -64,7 +64,7 @@ static int	set_info(t_shared_data *shared, char **argv)
 	while (argv[++index])
 	{
 		if (ft_atoi(argv[index], &data) && data <= 0)
-			return (0);
+			return (FAIL);
 		shared->info[index - 1] = data;
 	}
 	if (shared->info[IS_LIMIT_EAT])
@@ -74,39 +74,39 @@ static int	set_info(t_shared_data *shared, char **argv)
 	}
 	shared->forks = ft_calloc(shared->info[PHILOS], sizeof(int));
 	if (shared->forks == NULL)
-		return (0);
+		return (FAIL);
 	shared->m_forks = ft_calloc(shared->info[PHILOS], sizeof(pthread_mutex_t));
 	if (shared->m_forks == NULL)
 	{
 		ft_free((void **)&shared->forks);
-		return (0);
+		return (FAIL);
 	}
-	return (1);
+	return (SUCCESS);
 }
 
 static int	parse_by_argv(t_shared_data *shared, char **argv)
 {
-	if (is_digit_array(argv) == 0)
+	if (is_digit_array(argv) == FAIL)
 	{
 		print_error_message("Arguments should only be numeric");
-		return (0);
+		return (FAIL);
 	}
-	if (set_info(shared, argv) == 0)
+	if (set_info(shared, argv) == FAIL)
 	{
 		print_error_message("Arguments must be greater than zero");
-		return (0);
+		return (FAIL);
 	}
-	return (1);
+	return (SUCCESS);
 }
 
 int	parse_argument(int argc, char **argv, t_shared_data *shared)
 {
-	if (parse_by_argc(shared, argc) == 0)
-		return (0);
-	if (parse_by_argv(shared, argv) == 0)
+	if (parse_by_argc(shared, argc) == FAIL)
+		return (FAIL);
+	if (parse_by_argv(shared, argv) == FAIL)
 	{
 		ft_free((void **)&shared->info);
-		return (0);
+		return (FAIL);
 	}
-	return (1);
+	return (SUCCESS);
 }

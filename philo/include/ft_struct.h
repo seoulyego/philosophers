@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:52:31 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/29 20:38:05 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/30 14:54:31 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ enum e_routine
 	EATING,
 	SLEEPING,
 	THINKING,
-	DIED,
 	TAKE_FORKS
 };
 
@@ -81,10 +80,16 @@ enum e_fork_state
 	DISABLE
 };
 
-enum e_result
+enum e_bool
 {
 	FALSE,
 	TRUE
+};
+
+enum e_result
+{
+	FAIL,
+	SUCCESS
 };
 
 #endif
