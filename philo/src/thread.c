@@ -6,13 +6,14 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 17:07:31 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/30 17:59:01 yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/31 10:53:45 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "message.h"
 #include "monitor.h"
 #include "routine.h"
+#include <unistd.h>
 
 int	run_thread(t_philosopher *philosopher, int philos)
 {

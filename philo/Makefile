@@ -6,7 +6,7 @@
 #    By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/26 07:22:48 by yeongo            #+#    #+#              #
-#    Updated: 2023/03/30 18:07:38 by yeongo           ###   ########.fr        #
+#    Updated: 2023/03/31 10:49:47 by yeongo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,8 @@ PROJECT_NAME	:=	PHILOSOPHERS
 CC				:=	cc
 CFLAGS			:=	-Wall -Wextra -Werror
 CPPFLAGS		:=
-MJFLAGS			 =	
-LDFLAGS			:=	-pthread
-# -MJ $@.part.json
+MJFLAGS			 =	-MJ $@.part.json
+# LDFLAGS			:=	-pthread
 RM				:=	rm -rf
 
 HEADER			:=	./include/
@@ -73,8 +72,8 @@ $(OBJ_FOLDER)	:
 
 $(NAME)	:	$(OBJS)
 	@$(CC) $(LDFLAGS) $(DBFLAGS) -o $@ $^
+	@(printf [ && find . -name "*.part.json" | xargs cat && printf ]) > $(JSON_FILES);
 	@echo "\033[01;32m         SUCCESS!        \033[0m"
-# @(printf [ && find . -name "*.part.json" | xargs cat && printf ]) > $(JSON_FILES);
 
 $(OBJ_FOLDER)%.o	:	$(SRC_FOLDER)%.c
 	@$(CC) $(CFLAGS) $(DBFLAGS) $(CPPFLAGS) $(LDFLAGS) $(MJFLAGS) -c -o $@ $<

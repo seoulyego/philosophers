@@ -6,11 +6,12 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 16:40:14 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/30 16:56:43 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/31 10:54:54 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_struct.h"
+#include <stdio.h>
 
 void	print_info(int *info)
 {

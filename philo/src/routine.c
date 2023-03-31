@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 20:01:52 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/30 20:30:15 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/03/31 10:51:26 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ void	*philo_routine(void *philosopher)
 	if (philo->id == 1)
 		set_f_routine(f_routine);
 	if (philo->id % 2 == 0)
+		usleep(100);
+	else if (philo->id % 2 == 1
+		&& philo->id == shared->info[PHILOS])
 		usleep(100);
 	while (monitor_finish(shared) == FALSE)
 	{
