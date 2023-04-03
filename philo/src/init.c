@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 12:10:30 by yeongo            #+#    #+#             */
-/*   Updated: 2023/04/03 14:52:26 by yeongo           ###   ########seoul.kr  */
+/*   Updated: 2023/04/03 19:08:10 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ static int	init_mutex(t_philosopher *philosopher, t_shared_data *shared)
 	index = 0;
 	while (index < philos)
 	{
-		if (((pthread_mutex_init(&philosopher[index].m_last_eat_time, NULL)
-				|| pthread_mutex_init(&(shared->m_forks[index]), NULL))) != 0)
+		if (pthread_mutex_init(&philosopher[index].m_last_eat_time, NULL) != 0
+			|| pthread_mutex_init(&(shared->m_forks[index]), NULL) != 0)
 			return (FAIL);
 		index++;
 	}
-	if (((pthread_mutex_init(&(shared->m_end_philo), NULL)
-			|| pthread_mutex_init(&(shared->m_eat_complete), NULL)
-			|| pthread_mutex_init(&(shared->m_print), NULL))) != 0)
+	if (pthread_mutex_init(&(shared->m_end_philo), NULL) != 0
+		|| pthread_mutex_init(&(shared->m_eat_complete), NULL) != 0
+		|| pthread_mutex_init(&(shared->m_print), NULL) != 0)
 		return (FAIL);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 20:01:52 by yeongo            #+#    #+#             */
-/*   Updated: 2023/04/03 17:39:13 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/03 19:18:37 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,9 @@ void	*philo_routine(void *philosopher)
 
 	philo = philosopher;
 	shared = philo->shared;
+	usleep(500);
 	init_philo_time(philo, philo->shared);
 	if (philo->id % 2 == 0)
-		usleep(shared->info[TIME_TO_EAT] * 500);
-	if (philo->id == shared->info[PHILOS]
-		&& philo->id % 2 == 1)
 		usleep(shared->info[TIME_TO_EAT] * 500);
 	while (monitor_finish(shared) == FALSE)
 	{
