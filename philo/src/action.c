@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 22:42:53 by yeongo            #+#    #+#             */
-/*   Updated: 2023/04/03 16:16:07 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/03 21:04:55 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	spend_time(t_philosopher *philo, int target_time)
 
 	gettimeofday(&philo->cur_time, NULL);
 	timestamp = get_timestamp(philo->cur_time, started_time);
-	while (timestamp <= target_time)
+	while (timestamp < target_time)
 	{
 		gettimeofday(&philo->cur_time, NULL);
 		timestamp = get_timestamp(philo->cur_time, started_time);
@@ -54,6 +54,6 @@ int	philo_thinking(t_philosopher *philo)
 {
 	if (print_routine(philo, philo->shared, THINKING) == FAIL)
 		return (FAIL);
-	usleep(100);
+	// usleep(100);
 	return (SUCCESS);
 }

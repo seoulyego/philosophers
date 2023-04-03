@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 09:40:23 by yeongo            #+#    #+#             */
-/*   Updated: 2023/04/03 18:08:13 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/03 21:11:00 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	print_routine(t_philosopher *philo, t_shared_data *shared, int routine)
 		"get down a fork"
 	};
 
-	gettimeofday(&philo->cur_time, NULL);
 	pthread_mutex_lock(&shared->m_print);
+	gettimeofday(&philo->cur_time, NULL);
 	timestamp = get_timestamp(philo->cur_time, shared->start_time);
 	if (monitor_finish(shared) == FALSE)
 		printf("%d %d %s\n", timestamp, philo->id, message[routine]);
