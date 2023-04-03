@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   action.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 22:42:53 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/30 20:01:53 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/03 16:16:07 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,16 @@ int	spend_time(t_philosopher *philo, int target_time)
 
 int	philo_eating(t_philosopher *philo)
 {
-	if (take_forks(philo) && eat_philo(philo) && get_down_forks(philo) == 0)
+	if (take_forks(philo, philo->shared) == FAIL
+		|| eat_philo(philo, philo->shared) == FAIL
+		|| get_down_forks(philo, philo->shared) == FAIL)
 		return (FAIL);
 	return (SUCCESS);
 }
 
 int	philo_sleeping(t_philosopher *philo)
 {
-	if (print_routine(philo, SLEEPING) == FAIL
+	if (print_routine(philo, philo->shared, SLEEPING) == FAIL
 		|| spend_time(philo, philo->shared->info[TIME_TO_SLEEP]) == FAIL)
 		return (FAIL);
 	return (SUCCESS);
@@ -50,7 +52,7 @@ int	philo_sleeping(t_philosopher *philo)
 
 int	philo_thinking(t_philosopher *philo)
 {
-	if (print_routine(philo, THINKING) == FAIL)
+	if (print_routine(philo, philo->shared, THINKING) == FAIL)
 		return (FAIL);
 	usleep(100);
 	return (SUCCESS);

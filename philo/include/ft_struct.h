@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_struct.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:52:31 by yeongo            #+#    #+#             */
-/*   Updated: 2023/04/03 14:45:31 by yeongo           ###   ########seoul.kr  */
+/*   Updated: 2023/04/03 16:01:49 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ enum e_routine
 	EATING,
 	SLEEPING,
 	THINKING,
-	TAKE_FORKS
+	TAKE_FORK,
+	GET_DOWN_FORK
 };
 
 enum e_fork_state

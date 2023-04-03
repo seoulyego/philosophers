@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eat_action.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:15:41 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/30 18:14:38 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/03 16:16:58 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,11 @@ static int	set_eat_count(t_philosopher *philo, t_shared_data *shared)
 	return (0);
 }
 
-int	eat_philo(t_philosopher *philo)
+int	eat_philo(t_philosopher *philo, t_shared_data *shared)
 {
-	t_shared_data	*shared;
-
-	shared = philo->shared;
-	if (print_routine(philo, EATING) == FAIL
+	if (print_routine(philo, shared, EATING) == FAIL
 		|| set_eat_count(philo, shared)
-		|| spend_time(philo, philo->shared->info[TIME_TO_EAT]) == FAIL)
+		|| spend_time(philo, shared->info[TIME_TO_EAT]) == FAIL)
 	{
 		pthread_mutex_unlock(&shared->m_forks[philo->l_fork]);
 		pthread_mutex_unlock(&shared->m_forks[philo->r_fork]);

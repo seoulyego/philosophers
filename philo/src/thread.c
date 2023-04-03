@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 17:07:31 by yeongo            #+#    #+#             */
-/*   Updated: 2023/04/03 15:49:43 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/03 18:09:40 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	monitor_thread(t_philosopher *philosopher, \
 	id = -1;
 	index = 0;
 	result = FALSE;
-	while (1)
+	// usleep(shared->info[TIME_TO_DIE] * 500);
+	while (result == FALSE)
 	{
-		usleep(shared->info[TIME_TO_DIE] * 500);
 		result = monitor_starving(&philosopher[index], shared);
 		if (result == TRUE)
 		{
@@ -59,6 +59,7 @@ void	monitor_thread(t_philosopher *philosopher, \
 		}
 		result = monitor_finish(shared);
 		index = (index + 1) % philos;
+		usleep(100);
 	}
 	if (id != -1)
 		print_death(&philosopher[id], shared);

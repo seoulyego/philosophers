@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   message.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 09:40:23 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/30 20:01:25 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/03 18:08:13 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,17 @@ long	get_timestamp(t_time cur_time, t_time start_time)
 	+ (cur_time.tv_usec - start_time.tv_usec) / 1000);
 }
 
-int	print_routine(t_philosopher *philo, int routine)
+int	print_routine(t_philosopher *philo, t_shared_data *shared, int routine)
 {
 	int				timestamp;
-	t_shared_data	*shared;
-	const char		*message[4] = {
-		"is eating", "is sleeping", "is thinking", "has taken a fork"
+	const char		*message[5] = {
+		"is eating", "is sleeping", "is thinking", "has taken a fork",
+		"get down a fork"
 	};
 
-	shared = philo->shared;
 	gettimeofday(&philo->cur_time, NULL);
-	timestamp = get_timestamp(philo->cur_time, shared->start_time);
 	pthread_mutex_lock(&shared->m_print);
+	timestamp = get_timestamp(philo->cur_time, shared->start_time);
 	if (monitor_finish(shared) == FALSE)
 		printf("%d %d %s\n", timestamp, philo->id, message[routine]);
 	else
