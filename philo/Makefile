@@ -6,7 +6,7 @@
 #    By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/26 07:22:48 by yeongo            #+#    #+#              #
-#    Updated: 2023/03/31 10:49:47 by yeongo           ###   ########.fr        #
+#    Updated: 2023/04/03 14:23:19 by yeongo           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ ifdef TEST
 		OBJ				+=	$(addprefix $(OBJ_DIR), $(addsuffix .o, print_test))
 		PRINT			:=	$(addsuffix _TEST, $(PRINT))
 else ifdef DEBUG
-		DBFLAGS			:=	-g -fsanitize=address
+		DBFLAGS			:=	-g -fsanitize=undefined,thread
 		PRINT			:=	$(addsuffix _DEBUG, $(PRINT))
 endif
 

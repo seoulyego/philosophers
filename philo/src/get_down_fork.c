@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:23:15 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/30 16:24:04 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/03 14:20:10 by yeongo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ static int	get_down_r_fork(t_philosopher *philo, t_shared_data *shared)
 
 int	get_down_forks(t_philosopher *philo)
 {
-	if (get_down_l_fork(philo, philo->shared) == FAIL
-		|| get_down_r_fork(philo, philo->shared) == FAIL)
-		return (FAIL);
+	get_down_l_fork(philo, philo->shared)
+		|| get_down_r_fork(philo, philo->shared);
 	return (SUCCESS);
 }

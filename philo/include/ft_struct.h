@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:52:31 by yeongo            #+#    #+#             */
-/*   Updated: 2023/03/30 14:54:31 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/03 14:45:31 by yeongo           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ struct s_shared_data
 {
 	int				*info;
 	t_time			start_time;
+	int				(*f_routine[F_NUM])(t_philosopher *);
 
 	pthread_mutex_t	*m_forks;
 	int				*forks;
