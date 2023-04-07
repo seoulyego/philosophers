@@ -6,11 +6,10 @@
 /*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 09:40:23 by yeongo            #+#    #+#             */
-/*   Updated: 2023/04/08 06:52:37 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/08 07:07:46 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_struct.h"
 #include "monitor.h"
 #include "utils.h"
 #include <stdio.h>

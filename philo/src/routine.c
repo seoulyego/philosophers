@@ -6,11 +6,10 @@
 /*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 20:01:52 by yeongo            #+#    #+#             */
-/*   Updated: 2023/04/08 06:32:13 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/08 07:08:33 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "message.h"
 #include "monitor.h"
 #include <unistd.h>
 

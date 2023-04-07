@@ -6,14 +6,13 @@
 /*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:46:13 by yeongo            #+#    #+#             */
-/*   Updated: 2023/04/08 07:00:41 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/08 07:07:11 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "init.h"
 #include "thread.h"
-#include <pthread.h>
 #include <stdlib.h>
 
 static int	destroy_all_mutex(t_philosopher *philosopher, t_shared_data *shared)
