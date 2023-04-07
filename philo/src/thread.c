@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 17:07:31 by yeongo            #+#    #+#             */
-/*   Updated: 2023/04/08 05:54:20 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/08 06:41:10 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,15 @@ int	run_thread(t_philosopher *philosopher, int philos)
 	index = 0;
 	while (index < philos)
 	{
-		pthread_create(&philosopher[index].thread, NULL, \
-			philo_routine, &philosopher[index]);
+		if (pthread_create(&philosopher[index].thread, NULL, \
+			philo_routine, &philosopher[index]) > 0)
+		{
+			print_error_message("Fail to create thread");
+			return (FAIL);
+		}
 		index++;
 	}
-	return (1);
+	return (SUCCESS);
 }
 
 void	monitor_thread(
@@ -71,10 +75,14 @@ int	join_thread(t_philosopher *philosopher, int philos)
 	index = 0;
 	while (index < philos)
 	{
-		pthread_join(philosopher[index].thread, NULL);
+		if (pthread_join(philosopher[index].thread, NULL) > 0)
+		{
+			print_error_message("Fail to join thread");
+			return (FAIL);
+		}
 		index++;
 	}
-	return (1);
+	return (SUCCESS);
 }
 
 int	create_thread(t_philosopher *philosopher, t_shared_data *shared)
@@ -83,8 +91,10 @@ int	create_thread(t_philosopher *philosopher, t_shared_data *shared)
 
 	set_f_routine(shared->f_routine);
 	gettimeofday(&shared->start_time, NULL);
-	run_thread(philosopher, philos);
+	if (run_thread(philosopher, philos) == FAIL)
+		return (FAIL);
 	monitor_thread(philosopher, shared, philos);
-	join_thread(philosopher, philos);
-	return (1);
+	if (join_thread(philosopher, philos) == FAIL)
+		return (FAIL);
+	return (SUCCESS);
 }

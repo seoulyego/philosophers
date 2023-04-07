@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 09:40:23 by yeongo            #+#    #+#             */
-/*   Updated: 2023/04/08 05:59:22 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/08 06:52:37 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	print_routine(t_philosopher *philo, t_shared_data *shared, int routine)
 	return (SUCCESS);
 }
 
-int	print_death(t_philosopher *philo, t_shared_data *shared)
+void	print_death(t_philosopher *philo, t_shared_data *shared)
 {
 	int	timestamp;
 
@@ -52,7 +52,6 @@ int	print_death(t_philosopher *philo, t_shared_data *shared)
 	pthread_mutex_lock(&shared->m_print);
 	printf("%d %d died\n", timestamp, philo->id);
 	pthread_mutex_unlock(&shared->m_print);
-	return (SUCCESS);
 }
 
 void	print_error_message(char *err_message)

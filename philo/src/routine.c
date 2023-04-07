@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 20:01:52 by yeongo            #+#    #+#             */
-/*   Updated: 2023/04/08 05:51:58 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/08 06:32:13 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "monitor.h"
 #include <unistd.h>
 
-static void	init_philo_time(t_philosopher *philo, t_shared_data *shared)
+static void	set_philo_time(t_philosopher *philo, t_shared_data *shared)
 {
 	philo->cur_time = shared->start_time;
 	philo->last_eat_time = shared->start_time;
@@ -27,7 +27,7 @@ void	*philo_routine(void *philosopher)
 
 	philo = philosopher;
 	shared = philo->shared;
-	init_philo_time(philo, philo->shared);
+	set_philo_time(philo, philo->shared);
 	if (philo->id % 2 == 0)
 		usleep(shared->info[TIME_TO_EAT] * 500);
 	while (monitor_finish(shared) == FALSE)

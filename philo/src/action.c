@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 22:42:53 by yeongo            #+#    #+#             */
-/*   Updated: 2023/04/08 04:11:13 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/08 06:57:38 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	spend_time(t_philosopher *philo, int target_time)
 int	philo_eating(t_philosopher *philo)
 {
 	if (take_forks(philo, philo->shared) == FAIL
-		|| eat_philo(philo, philo->shared) == FAIL
-		|| get_down_forks(philo, philo->shared) == FAIL)
+		|| eat_philo(philo, philo->shared) == FAIL)
 		return (FAIL);
+	get_down_forks(philo, philo->shared);
 	return (SUCCESS);
 }
 

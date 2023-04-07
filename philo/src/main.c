@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:46:13 by yeongo            #+#    #+#             */
-/*   Updated: 2023/04/08 03:32:21 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/08 07:00:41 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 
-void	destroy_all_mutex(t_philosopher *philosopher, t_shared_data *shared)
+static int	destroy_all_mutex(t_philosopher *philosopher, t_shared_data *shared)
 {
 	const int	philos = shared->info[PHILOS];
 	int			index;
@@ -24,20 +24,29 @@ void	destroy_all_mutex(t_philosopher *philosopher, t_shared_data *shared)
 	index = 0;
 	while (index < philos)
 	{
-		pthread_mutex_destroy(&philosopher[index].m_last_eat_time);
-		pthread_mutex_destroy(&shared->m_forks[index]);
+		if (pthread_mutex_destroy(&philosopher[index].m_last_eat_time) > 0)
+			return (FAIL);
+		if (pthread_mutex_destroy(&shared->m_forks[index]) > 0)
+			return (FAIL);
 		index++;
 	}
-	pthread_mutex_destroy(&shared->m_end_philo);
-	pthread_mutex_destroy(&shared->m_eat_complete);
-	pthread_mutex_destroy(&shared->m_print);
+	if (pthread_mutex_destroy(&shared->m_end_philo) > 0)
+		return (FAIL);
+	if (pthread_mutex_destroy(&shared->m_eat_complete) > 0)
+		return (FAIL);
+	if (pthread_mutex_destroy(&shared->m_print) > 0)
+		return (FAIL);
+	return (SUCCESS);
 }
 
-void	free_all_memories(t_philosopher **philosopher, t_shared_data *shared)
+static void	free_all_memory(t_philosopher **philosopher, t_shared_data *shared)
 {
 	free(shared->forks);
+	shared->forks = NULL;
 	free(shared->m_forks);
+	shared->m_forks = NULL;
 	free(shared->info);
+	shared->info = NULL;
 	free(*philosopher);
 	*philosopher = NULL;
 }
@@ -51,8 +60,10 @@ int	main(int argc, char **argv)
 		return (1);
 	if (init_philosopher(&philosopher, &shared) == FAIL)
 		return (1);
-	create_thread(philosopher, &shared);
-	destroy_all_mutex(philosopher, &shared);
-	free_all_memories(&philosopher, &shared);
+	if (create_thread(philosopher, &shared) == FAIL)
+		return (1);
+	if (destroy_all_mutex(philosopher, &shared) == FAIL)
+		return (1);
+	free_all_memory(&philosopher, &shared);
 	return (0);
 }
