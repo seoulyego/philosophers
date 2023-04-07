@@ -4,4 +4,6 @@
 *.json
 
 philo/philo
+philo/src/join.c
+philo/src/print_test.c
 philo_bonus/philo_bonus

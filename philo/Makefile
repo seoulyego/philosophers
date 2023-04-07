@@ -6,7 +6,7 @@
 #    By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/26 07:22:48 by yeongo            #+#    #+#              #
-#    Updated: 2023/04/03 14:23:19 by yeongo           ###   ########seoul.kr   #
+#    Updated: 2023/04/08 03:47:50 by yeongo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ CC				:=	cc
 CFLAGS			:=	-Wall -Wextra -Werror
 CPPFLAGS		:=
 MJFLAGS			 =	-MJ $@.part.json
-# LDFLAGS			:=	-pthread
 RM				:=	rm -rf
 
 HEADER			:=	./include/

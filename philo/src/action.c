@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 22:42:53 by yeongo            #+#    #+#             */
-/*   Updated: 2023/04/03 21:04:55 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/08 03:14:38 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,5 @@ int	philo_thinking(t_philosopher *philo)
 {
 	if (print_routine(philo, philo->shared, THINKING) == FAIL)
 		return (FAIL);
-	// usleep(100);
 	return (SUCCESS);
 }
