@@ -6,11 +6,12 @@
 /*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 09:59:57 by yeongo            #+#    #+#             */
-/*   Updated: 2023/04/08 02:09:24 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/08 05:50:44 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "message.h"
+#include <stdio.h>
 
 static int	take_r_fork(t_philosopher *philo, t_shared_data *shared)
 {
@@ -46,6 +47,7 @@ static int	take_l_fork(t_philosopher *philo, t_shared_data *shared)
 int	take_forks(t_philosopher *philo, t_shared_data *shared)
 {
 	if (take_r_fork(philo, shared) == FAIL
+		|| philo->r_fork == philo->l_fork
 		|| take_l_fork(philo, shared) == FAIL)
 		return (FAIL);
 	return (SUCCESS);

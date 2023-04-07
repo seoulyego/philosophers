@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 09:40:23 by yeongo            #+#    #+#             */
-/*   Updated: 2023/04/08 03:15:52 by yeongo           ###   ########.fr       */
+/*   Updated: 2023/04/08 05:59:22 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ long	get_timestamp(t_time cur_time, t_time start_time)
 
 int	print_routine(t_philosopher *philo, t_shared_data *shared, int routine)
 {
-	int				timestamp;
-	const char		*message[5] = {
+	int			timestamp;
+	const char	*message[5] = {
 		"is eating", "is sleeping", "is thinking", "has taken a fork",
 		"get down a fork"
 	};
