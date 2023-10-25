@@ -76,7 +76,6 @@ $(NAME)	:	$(OBJS)
 
 $(OBJ_FOLDER)%.o	:	$(SRC_FOLDER)%.c
 	@$(CC) $(CFLAGS) $(DBFLAGS) $(CPPFLAGS) $(LDFLAGS) $(MJFLAGS) -c -o $@ $<
- 
 
 .PHONY	:	test
 test	:
